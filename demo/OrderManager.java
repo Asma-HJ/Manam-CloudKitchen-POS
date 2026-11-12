@@ -1,6 +1,4 @@
-package com.cloudkitchen.demo;
-
-import javax.swing.*;
+ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -242,7 +240,7 @@ public class OrderManager extends JFrame {
         cartCenter.add(toggleRow);
         cartCenter.add(Box.createVerticalStrut(10));
 
-        deliveryAddressField = new JTextField(loggedInUserAddress);
+        deliveryAddressField = new JTextField("");
         deliveryAddressField.setMaximumSize(new Dimension(280, 35));
         deliveryAddressField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         cartCenter.add(deliveryAddressField);
@@ -287,6 +285,11 @@ public class OrderManager extends JFrame {
             double finalAmt = currentSubtotal * discountMultiplier;
             if (finalAmt <= 0) {
                 JOptionPane.showMessageDialog(this, "Your cart is empty! Please add items first.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String address = deliveryAddressField.getText().trim();
+            if (address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid delivery address.", "Address Required", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
